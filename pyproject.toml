@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mmigrator"
+version = "0.0.1"
+authors = [
+  { name="Serhii Kovalov", email="moiserge.k@gmail.com" },
+]
+description = "Migration engine for pymongo"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/sergekovalev/mmigrator"
+"Bug Tracker" = "https://github.com/sergekovalev/mmigrator/issues"
