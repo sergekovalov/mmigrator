@@ -1,7 +1,7 @@
 import os
-from db import connect_db
-from config_manager import ConfigManager
-from migration import Migration
+from .db import connect_db
+from .config_manager import ConfigManager
+from .migration import Migration
 
 
 class MigrationManager(object):

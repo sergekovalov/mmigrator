@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import sys
-from migration_manager import MigrationManager
-from constants import HELP_TEMPLATE
+from .migration_manager import MigrationManager
+from .constants import HELP_TEMPLATE
 
 args = sys.argv[1:]
 

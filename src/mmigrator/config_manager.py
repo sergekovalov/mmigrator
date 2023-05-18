@@ -1,6 +1,6 @@
 import os
 import json
-from constants import CONFIG_FILE_NAME, CONFIG_FILE_TEMPLATE, SCHEMA_FILE_NAME, SCHEMA_FILE_TEMPLATE
+from .constants import CONFIG_FILE_NAME, CONFIG_FILE_TEMPLATE, SCHEMA_FILE_NAME, SCHEMA_FILE_TEMPLATE
 
 
 class ConfigManager(object):

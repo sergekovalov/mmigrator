@@ -2,8 +2,8 @@ from importlib import util
 import snakecase
 import sys
 import os
-from constants import MIGRATION_TEMPLATE
 from datetime import datetime
+from .constants import MIGRATION_TEMPLATE
 
 
 class Migration(object):
@@ -16,7 +16,7 @@ class Migration(object):
     def name(self):
         return self.__name
 
-    def __init__(self, name: str, dist: str, db = None):
+    def __init__(self, name: str, dist: str, db=None):
         self.__name = name
         self.__dist = dist
         self.__filename = f'{os.getcwd()}/{dist}/{name}.py'
