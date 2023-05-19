@@ -1,8 +1,10 @@
 CONFIG_FILE_NAME = 'mmigrator.config.json'
 MMIGRATOR_COLLECTION = '__mmigrator__'
 
+BASIC_DIST = 'migrations'
+
 CONFIG_FILE_TEMPLATE = {
-    'dist': 'migrations',
+    'dist': BASIC_DIST,
     'connection': {
         'host': '',
         'port': '',

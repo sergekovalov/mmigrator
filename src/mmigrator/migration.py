@@ -39,9 +39,9 @@ class Migration(object):
         return f'{d.year}{month}{day}{hour}{minute}{second}'
     
     def __load_func(self, func_name):
-        spec = util.spec_from_file_location("migrations", self.__filename)
+        spec = util.spec_from_file_location(self.__dist, self.__filename)
         module = util.module_from_spec(spec)
-        sys.modules["migrations"] = module
+        sys.modules[self.__dist] = module
         spec.loader.exec_module(module)
         func = getattr(module, func_name)
         
