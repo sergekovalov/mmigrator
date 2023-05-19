@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mmigrator"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Serhii Kovalov", email="moiserge.k@gmail.com" },
 ]
@@ -17,9 +17,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    'pydantic==1.10.7',
-    'pymongo==4.3.3',
-    'snakecase==1.0.1'
+    'pydantic',
+    'pymongo',
+    'snakecase'
 ]
 
 [project.urls]

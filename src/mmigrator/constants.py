@@ -1,4 +1,6 @@
 CONFIG_FILE_NAME = 'mmigrator.config.json'
+MMIGRATOR_COLLECTION = '__mmigrator__'
+
 CONFIG_FILE_TEMPLATE = {
     'dist': 'migrations',
     'connection': {
@@ -9,13 +11,6 @@ CONFIG_FILE_TEMPLATE = {
         'password': ''
     }
 }
-
-SCHEMA_FILE_NAME = 'mmigrator.schema.json'
-SCHEMA_FILE_TEMPLATE = {
-    'current-migration': None,
-    'collections': {}
-}
-
 
 MIGRATION_TEMPLATE = '''
 def up(db):

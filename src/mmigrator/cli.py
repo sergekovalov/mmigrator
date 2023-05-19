@@ -1,8 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 from .migration_manager import MigrationManager
 from .constants import HELP_TEMPLATE
+
+sys.path.append('src/mmmimgrator')
 
 args = sys.argv[1:]
 

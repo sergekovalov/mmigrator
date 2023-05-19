@@ -49,7 +49,7 @@ class Migration(object):
     
     def migrate(self):
         up = self.__load_func('up')
-        
+
         up(self.__db)
     
     def revert(self):
