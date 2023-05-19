@@ -11,6 +11,37 @@ $ python -m pip install mmigrator
 ```
 
 ### Usage
+### CLI
+
+#### Help
+```bash
+$ mmigrator help
+```
+
+#### Init configs
+optional, will run automatically on any command*
+```bash
+$ mmigrator init
+```
+
+#### Create migration
+```bash
+$ mmigrator g SomeName
+# or
+$ mmigrator new SomeName
+```
+
+#### Run migrations
+```bash
+$ mmigrator migrate
+```
+
+
+#### Revert migrations
+```bash
+$ mmigrator revert
+```
+
 ### From code
 #### Init configs
 ```py
@@ -21,22 +52,16 @@ MigrationManager.init()
 
 #### Create migration
 ```py
-from mmigrator import MigrationManager
-...
 MigrationManager.generate('SomeName')
 ```
 
 #### Run migrations
 ```py
-from mmigrator import MigrationManager
-...
 MigrationManager.migrate()
 ```
 
 
 #### Revert migrations
 ```py
-from mmigrator import MigrationManager
-...
 MigrationManager.revert()
 ```

@@ -17,27 +17,15 @@ class MigrationManager(object):
         self.__config = ConfigManager.read_config()
 
         self.__dist = self.__config['dist']
-        if not os.path.exists(self.__dist):
-            os.mkdir(self.__dist)
+        ConfigManager.init_dist(self.__dist)
 
         self.__db = connect_db(self.__config['connection'])
         
-        if MMIGRATOR_COLLECTION not in self.__db.list_collection_names():
-            self.__db.create_collection(MMIGRATOR_COLLECTION)
-            self.__db[MMIGRATOR_COLLECTION].insert_one({'version': None})
-        
-        self.__version = self.__db[MMIGRATOR_COLLECTION].find_one()['version']
+        self.__init_version()
 
     @staticmethod
     def init():
         ConfigManager.init_config()
-
-    def __get_files_list(self) -> (list[str], int):
-        files = [f.rsplit(".")[0] for f in os.listdir(self.__dist)[::-1] if not f.startswith('__')]
-        files = sorted(files, key=lambda x: int(x.split('_', 1)[0]))
-        last_index = files.index(self.__version) if self.__version in files else -1
-
-        return files, last_index
 
     def generate(self, name):
         mig = Migration(name=name, dist=self.__dist)
@@ -100,3 +88,17 @@ class MigrationManager(object):
             {},
             {'$set': {'version': self.__version}}
         )
+
+    def __get_files_list(self) -> (list[str], int):
+        files = [f.rsplit(".")[0] for f in os.listdir(self.__dist)[::-1] if not f.startswith('__')]
+        files = sorted(files, key=lambda x: int(x.split('_', 1)[0]))
+        last_index = files.index(self.__version) if self.__version in files else -1
+
+        return files, last_index
+
+    def __init_version(self):
+        if MMIGRATOR_COLLECTION not in self.__db.list_collection_names():
+            self.__db.create_collection(MMIGRATOR_COLLECTION)
+            self.__db[MMIGRATOR_COLLECTION].insert_one({'version': None})
+        
+        self.__version = self.__db[MMIGRATOR_COLLECTION].find_one()['version']
