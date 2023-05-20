@@ -26,7 +26,7 @@ class MigrationManager(object):
     @staticmethod
     def init():
         ConfigManager.init_config()
-
+    
     def generate(self, name):
         mig = Migration(name=name, dist=self.__dist)
         mig.generate()

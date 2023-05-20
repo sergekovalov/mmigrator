@@ -1,17 +1,22 @@
 import os
 import json
 import re
+from .process import process
 from .constants import CONFIG_FILE_NAME, CONFIG_FILE_TEMPLATE
 
 
 class ConfigManager(object):
     @staticmethod
     def init_config():
-        if not os.path.exists(CONFIG_FILE_NAME):
+        @process('Initializing configs')
+        def init():
             conf = json.dumps(CONFIG_FILE_TEMPLATE, indent=4)
             
             with open(CONFIG_FILE_NAME, 'w') as f:
                 f.write(conf)
+            
+        if not os.path.exists(CONFIG_FILE_NAME):
+            init()
 
     @staticmethod
     def read_config() -> dict:

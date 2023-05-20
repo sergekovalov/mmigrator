@@ -1,9 +1,6 @@
 # MongoDb Migrator
 Migration engine for MongoDB
 
-### Supports drivers:
-- pymongo
-
 ## Installation
 
 ```bash
