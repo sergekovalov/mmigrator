@@ -22,7 +22,7 @@ class ConfigManager(object):
     def read_config() -> dict:
         def load_env_var(filename: str, varname: str) -> str:
             with open(filename, 'r') as f:
-                m = re.match(fr'{varname}\s?=\s?(.+)', f.read())
+                m = re.search(fr'{varname}\s?=\s?(.+)', f.read())
 
                 if not m:
                     raise Exception(f'Cannot parse {varname} variable from file {filename}')
