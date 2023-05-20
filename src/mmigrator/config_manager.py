@@ -20,14 +20,24 @@ class ConfigManager(object):
 
     @staticmethod
     def read_config() -> dict:
-        def load_env_var(filename: str, varname: str) -> str:
+        def load_var(filename: str, varname: str) -> str:
+            var_value = None
+
             with open(filename, 'r') as f:
-                m = re.search(fr'{varname}\s?=\s?(.+)', f.read())
-
-                if not m:
-                    raise Exception(f'Cannot parse {varname} variable from file {filename}')
-
-                return m[1]
+                data = f.read()
+                
+            if re.match(r'^.*\.json$', filename):
+                data = json.loads(data)
+                var_value = data.get(varname)
+            else:
+                m = re.search(fr'{varname}\s?=\s?(.+)', data)
+                if m:
+                    var_value = m[1]
+            
+            if not var_value:
+                raise Exception(f'Cannot parse {varname} variable from file {filename}')
+            
+            return var_value
 
         with open(CONFIG_FILE_NAME, 'r') as f:
             cfg = json.loads(f.read())
@@ -35,7 +45,7 @@ class ConfigManager(object):
         for k, v in cfg['connection'].items():
             if v and re.match(r'^.+\[.+\]$', v):
                 file, var = re.sub(r'[\[\]]', ' ', v).strip().split(' ')
-                cfg['connection'][k] = load_env_var(file, var)
+                cfg['connection'][k] = load_var(file, var)
 
         return cfg
 

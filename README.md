@@ -23,7 +23,7 @@ with following structure:
     }
 }
 ```
-Connection variables could be set from any file.\
+Connection variables could be set from .env|.json files.\
 e.g. from .env file:
 ```json
 "host": ".env[MONGO_HOST]",
