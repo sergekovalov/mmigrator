@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mmigrator"
-version = "0.0.10"
+version = "0.0.11"
 authors = [
   { name="Serhii Kovalov", email="moiserge.k@gmail.com" },
 ]
-description = "Migration engine for pymongo"
+description = "Migration engine for MongoDB"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
