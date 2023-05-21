@@ -1,5 +1,6 @@
 # MongoDb Migrator
-Migration engine for MongoDB
+Migration engine for MongoDB\
+Supports CLI
 
 ## Installation
 
@@ -41,7 +42,7 @@ $ mmigrator help
 ```
 
 ### Init configs
-optional, wil l run automatically on any migration command*
+optional, will run automatically on any migration command*
 #### CLI 
 ```bash
 $ mmigrator init
@@ -71,11 +72,16 @@ MigrationManager.generate("SomeName")
 #### CLI
 ```bash
 $ mmigrator migrate
+# or add --silent flag for dry-run (skip exceptions)
+$ mmigrator migrate --silent
 ```
 
 #### from code:
 ```py
 MigrationManager.migrate()
+# or add silent=True flag for dry-run (skip exceptions)
+MigrationManager.migrate(silent=True)
+
 ```
 
 
@@ -83,9 +89,13 @@ MigrationManager.migrate()
 #### CLI
 ```bash
 $ mmigrator revert
+# or add --silent flag for dry-run (skip exceptions)
+$ mmigrator revert --silent
 ```
 
 #### from code:
 ```py
 MigrationManager.revert()
+# or add silent=True flag for dry-run (skip exceptions)
+MigrationManager.revert(silent=True)
 ```

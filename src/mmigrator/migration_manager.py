@@ -1,12 +1,14 @@
 import os
 from .db import connect_db
-from .config_manager import ConfigManager
+from .config_manager.config_manager import ConfigManager
 from .migration import Migration
 from .constants import MMIGRATOR_COLLECTION
+from typing import Any, Mapping
+from pymongo.database import Database
 
 
 class MigrationManager(object):
-    __db = None
+    __db: Database[Mapping[str, Any] | Any] = None
     __config: dict = None
     __version: str = None
     __dist: str = None
@@ -33,7 +35,7 @@ class MigrationManager(object):
         
         print(f'\nSuccessfully created new migration {mig.name}\n')
 
-    def revert(self):
+    def revert(self, silent=False):
         files, last_index = self.__get_files_list()
         prev_index = last_index-1
 
@@ -47,7 +49,7 @@ class MigrationManager(object):
 
         mig = Migration(name=file, dist=self.__dist, db=self.__db)
         
-        mig.revert()
+        mig.revert(silent)
         
         if last_index > 0:
             print(f'Current migration is...{files[prev_index]}')
@@ -55,7 +57,7 @@ class MigrationManager(object):
         self.__version = files[prev_index] if last_index > 0 else None
         self.__persist_version()
 
-    def migrate(self):
+    def migrate(self, silent=False):
         files, last_index = self.__get_files_list()
         files = files[last_index + 1:]
 
@@ -75,7 +77,7 @@ class MigrationManager(object):
                     db=self.__db
                 )
     
-                mig.migrate()
+                mig.migrate(silent)
 
                 self.__version = file
         except Exception as e:

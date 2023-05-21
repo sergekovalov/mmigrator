@@ -1,8 +1,9 @@
 import os
 import json
 import re
-from .process import process
-from .constants import CONFIG_FILE_NAME, CONFIG_FILE_TEMPLATE
+from ..process import process
+from ..constants import CONFIG_FILE_NAME, CONFIG_FILE_TEMPLATE
+from .helpers import load_var
 
 
 class ConfigManager(object):
@@ -20,25 +21,6 @@ class ConfigManager(object):
 
     @staticmethod
     def read_config() -> dict:
-        def load_var(filename: str, varname: str) -> str:
-            var_value = None
-
-            with open(filename, 'r') as f:
-                data = f.read()
-                
-            if re.match(r'^.*\.json$', filename):
-                data = json.loads(data)
-                var_value = data.get(varname)
-            else:
-                m = re.search(fr'{varname}\s?=\s?(.+)', data)
-                if m:
-                    var_value = m[1]
-            
-            if not var_value:
-                raise Exception(f'Cannot parse {varname} variable from file {filename}')
-            
-            return var_value
-
         with open(CONFIG_FILE_NAME, 'r') as f:
             cfg = json.loads(f.read())
 

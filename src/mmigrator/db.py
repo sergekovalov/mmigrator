@@ -1,7 +1,10 @@
+from typing import Any, Mapping
+
 import pymongo
+from pymongo.database import Database
 
 
-def connect_db(connection: dict):
+def connect_db(connection: dict) -> Database[Mapping[str, Any] | Any]:
     mongo_user = connection['user']
     mongo_db = connection['database']
     mongo_password = connection['password']

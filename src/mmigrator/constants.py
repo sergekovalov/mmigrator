@@ -26,18 +26,27 @@ def down(db):
 
 HELP_TEMPLATE = '''
 Available commands:
-> help                                   Get help
+> help                                                                  Get help
 
-> [new | g] <migration name>             Generate new migration
+> init                                                                  Initialize configs
+Optional command. Will run automatically on every migration operation.
+Example:
+mmigrator init
+
+> [new | g] <migration name>                                            Generate new migration
 Example:
 mmigrator new Initial
 mmigrator g Initial
 
-> migrate                                Apply all resting migrations
+> migrate                                                               Apply all resting migrations
 Example:
 mmigrator migrate
+You can add --silent flag for dry-run (skip exceptions)
+mmigrator migrate --silent
 
-> revert                                 Revert last migration
+> revert                                                                Revert last migration
 Example:
 mmigrator revert
+You can add --silent flag for dry-run (skip exceptions)
+mmigrator revert --silent
 '''

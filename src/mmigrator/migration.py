@@ -47,12 +47,20 @@ class Migration(object):
         
         return func
     
-    def migrate(self):
-        up = self.__load_func('up')
+    def migrate(self, silent=False):
+        try:
+            up = self.__load_func('up')
 
-        up(self.__db)
+            up(self.__db)
+        except Exception as e:
+            if not silent:
+                raise Exception(f'Error: {str(e)}')
     
-    def revert(self):
-        down = self.__load_func('down')
-        
-        down(self.__db)
+    def revert(self, silent=False):
+        try:
+            down = self.__load_func('down')
+
+            down(self.__db)
+        except Exception as e:
+            if not silent:
+                raise Exception(f'Error: {str(e)}')
