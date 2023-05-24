@@ -7,16 +7,16 @@ from .constants import MIGRATION_TEMPLATE
 
 
 class Migration(object):
-    __name: str = None
-    __filename: str = None
+    __name = None
+    __filename = None
     __db = None
-    __dist: str = None
+    __dist = None
 
     @property
     def name(self):
         return self.__name
 
-    def __init__(self, name: str, dist: str, db=None):
+    def __init__(self, name, dist, db=None):
         self.__name = name
         self.__dist = dist
         self.__filename = f'{os.getcwd()}/{dist}/{name}.py'

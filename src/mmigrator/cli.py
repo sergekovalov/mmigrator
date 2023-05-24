@@ -8,7 +8,7 @@ from .constants import HELP_TEMPLATE
 args = sys.argv[1:]
 
 
-def get_args_with_option(option) -> (str, str):
+def get_args_with_option(option):
     arg, *opt = args
 
     if len(opt) and opt[0] != option:

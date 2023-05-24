@@ -3,15 +3,13 @@ from .db import connect_db
 from .config_manager.config_manager import ConfigManager
 from .migration import Migration
 from .constants import MMIGRATOR_COLLECTION
-from typing import Any, Mapping
-from pymongo.database import Database
 
 
 class MigrationManager(object):
-    __db: Database[Mapping[str, Any] | Any] = None
-    __config: dict = None
-    __version: str = None
-    __dist: str = None
+    __db = None
+    __config = None
+    __version = None
+    __dist = None
 
     def __init__(self):
         MigrationManager.init()
@@ -91,12 +89,16 @@ class MigrationManager(object):
             {'$set': {'version': self.__version}}
         )
 
-    def __get_files_list(self) -> (list[str], int):
-        files = [f.rsplit(".")[0] for f in os.listdir(self.__dist)[::-1] if not f.startswith('__')]
-        files = sorted(files, key=lambda x: int(x.split('_', 1)[0]))
-        last_index = files.index(self.__version) if self.__version in files else -1
+    def __get_files_list(self):
+        try:
+            files = [f.rsplit(".")[0] for f in os.listdir(self.__dist)]
+            files = sorted(files, key=lambda x: int(x.split('_', 1)[0]))
 
-        return files, last_index
+            last_index = files.index(self.__version) if self.__version in files else -1
+
+            return files, last_index
+        except Exception as e:
+            raise Exception('Failed to load a list of files associated to migrations.')
 
     def __init_version(self):
         if MMIGRATOR_COLLECTION not in self.__db.list_collection_names():

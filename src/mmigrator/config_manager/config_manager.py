@@ -20,7 +20,7 @@ class ConfigManager(object):
             init()
 
     @staticmethod
-    def read_config() -> dict:
+    def read_config():
         with open(CONFIG_FILE_NAME, 'r') as f:
             cfg = json.loads(f.read())
 
@@ -32,6 +32,6 @@ class ConfigManager(object):
         return cfg
 
     @staticmethod
-    def init_dist(dist: str):
+    def init_dist(dist):
         if not os.path.exists(dist):
             os.mkdir(dist)

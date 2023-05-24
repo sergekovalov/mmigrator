@@ -2,17 +2,17 @@ import re
 import json
 
 
-def try_load_from_json(varname: str, data: str) -> str | None:
-    data = json.loads(data)
-    return data.get(varname)
+def try_load_from_json(varname, data):
+    return json.loads(data).get(varname)
 
 
-def try_load_from_dotenv(varname: str, data: str) -> str | None:
+def try_load_from_dotenv(varname, data):
     m = re.search(fr'{varname}\s?=\s?(.+)', data)
+
     return m[1] if m else None
 
 
-def load_var(filename: str, varname: str) -> str:
+def load_var(filename, varname):
     var_value = None
 
     with open(filename, 'r') as f:

@@ -2,7 +2,7 @@ import functools
 import sys
 
 
-def process(cmd: str):
+def process(cmd):
     def outer_wrapper(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
