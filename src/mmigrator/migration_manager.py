@@ -1,4 +1,5 @@
 import os
+import re
 from .db import connect_db
 from .config_manager.config_manager import ConfigManager
 from .migration import Migration
@@ -91,13 +92,14 @@ class MigrationManager(object):
 
     def __get_files_list(self):
         try:
-            files = [f.rsplit(".")[0] for f in os.listdir(self.__dist)]
+            files = [f.rsplit(".")[0] for f in os.listdir(self.__dist) if re.match(r'^\d+_\w+\.py$', f)]
             files = sorted(files, key=lambda x: int(x.split('_', 1)[0]))
 
             last_index = files.index(self.__version) if self.__version in files else -1
 
             return files, last_index
         except Exception as e:
+            print('>>>', e)
             raise Exception('Failed to load a list of files associated to migrations.')
 
     def __init_version(self):
