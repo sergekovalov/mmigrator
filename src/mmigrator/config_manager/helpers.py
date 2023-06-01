@@ -7,7 +7,7 @@ def try_load_from_json(varname, data):
 
 
 def try_load_from_dotenv(varname, data):
-    m = re.search(fr'{varname}\s?=\s?(.+)', data)
+    m = re.search(fr'{varname}\s?=\s?(.*)', data)
 
     return m[1] if m else None
 
