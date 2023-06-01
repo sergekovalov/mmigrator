@@ -13,17 +13,17 @@ def try_load_from_dotenv(varname, data):
 
 
 def load_var(filename, varname):
-    var_value = None
-
-    with open(filename, 'r') as f:
-        data = f.read()
-
-    if re.match(r'^.*\.json$', filename):
-        var_value = try_load_from_json(varname, data)
-    else:
-        var_value = try_load_from_dotenv(varname, data)
-
-    if not var_value:
+    try:
+        var_value = None
+    
+        with open(filename, 'r') as f:
+            data = f.read()
+    
+        if re.match(r'^.*\.json$', filename):
+            var_value = try_load_from_json(varname, data)
+        else:
+            var_value = try_load_from_dotenv(varname, data)
+        
+        return var_value
+    except Exception:
         raise Exception(f'Cannot parse {varname} variable from file {filename}')
-
-    return var_value
