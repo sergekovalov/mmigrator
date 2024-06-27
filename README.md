@@ -27,11 +27,13 @@ with following structure:
 Connection variables could be set from .env|.json files.\
 e.g. from .env file:
 ```json
-"host": ".env[MONGO_HOST]",
-"port": ".env[MONGO_PORT]",
-"database": ".env[MONGO_DB]",
-"user": ".env[MONGO_USER]",
-"password": ".env[MONGO_PASSWORD]"
+{
+  "host": ".env[MONGO_HOST]",
+  "port": ".env[MONGO_PORT]",
+  "database": ".env[MONGO_DB]",
+  "user": ".env[MONGO_USER]",
+  "password": ".env[MONGO_PASSWORD]"
+}
 ```
 
 ## Usage
@@ -71,15 +73,17 @@ MigrationManager.generate("SomeName")
 ### Run migrations
 #### CLI
 ```bash
-$ mmigrator migrate
-# or add --silent flag for dry-run (skip exceptions)
+$ mmigrator migrate # or mmigrator run
+
+# add --silent flag for dry-run (skip exceptions)
 $ mmigrator migrate --silent
 ```
 
 #### from code:
 ```py
-MigrationManager.migrate()
-# or add silent=True flag for dry-run (skip exceptions)
+MigrationManager.migrate() # or MigrationManager.run()
+
+# add silent=True flag for dry-run (skip exceptions)
 MigrationManager.migrate(silent=True)
 
 ```
@@ -88,14 +92,16 @@ MigrationManager.migrate(silent=True)
 ### Revert migrations
 #### CLI
 ```bash
-$ mmigrator revert
-# or add --silent flag for dry-run (skip exceptions)
+$ mmigrator revert # or mmigrator rollback
+
+# add --silent flag for dry-run (skip exceptions)
 $ mmigrator revert --silent
 ```
 
 #### from code:
 ```py
-MigrationManager.revert()
-# or add silent=True flag for dry-run (skip exceptions)
+MigrationManager.revert() # or MigrationManager.rollback()
+
+# add silent=True flag for dry-run (skip exceptions)
 MigrationManager.revert(silent=True)
 ```

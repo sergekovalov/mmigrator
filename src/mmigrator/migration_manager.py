@@ -55,6 +55,9 @@ class MigrationManager(object):
 
         self.__version = files[prev_index] if last_index > 0 else None
         self.__persist_version()
+    
+    def rollback(self, silent=False):
+        self.revert(silent)
 
     def migrate(self, silent=False):
         files, last_index = self.__get_files_list()
@@ -83,6 +86,9 @@ class MigrationManager(object):
             print(e)
         finally:
             self.__persist_version()
+    
+    def run(self, silent=False):
+        self.migrate(silent)
 
     def __persist_version(self):
         self.__db[MMIGRATOR_COLLECTION].update_one(

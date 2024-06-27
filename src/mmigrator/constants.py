@@ -38,13 +38,13 @@ Example:
 mmigrator new Initial
 mmigrator g Initial
 
-> migrate                                                               Apply all resting migrations
+> [migrate | run]                                                       Apply all resting migrations
 Example:
 mmigrator migrate
 You can add --silent flag for dry-run (skip exceptions)
 mmigrator migrate --silent
 
-> revert                                                                Revert last migration
+> [revert | rollback]                                                    Revert last migration
 Example:
 mmigrator revert
 You can add --silent flag for dry-run (skip exceptions)

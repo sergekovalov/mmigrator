@@ -30,12 +30,12 @@ def main():
     elif args[0] in ['new', 'g']:
         MigrationManager().generate(args[1])
     
-    elif args[0] == 'migrate':
+    elif args[0] in ['migrate', 'run']:
         _, run_silently = get_args_with_option('--silent')
 
         MigrationManager().migrate(silent=bool(run_silently))
     
-    elif args[0] == 'revert':
+    elif args[0] in ['revert', 'rollback']:
         _, run_silently = get_args_with_option('--silent')
 
         MigrationManager().revert(silent=bool(run_silently))
